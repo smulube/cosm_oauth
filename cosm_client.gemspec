@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Sam Mulube"]
   s.email       = ["sam@pachube.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Simple Ruby client for accessing the Cosm API via OAuth.}
+  s.description = %q{Simple Ruby client for accessing the Cosm API via OAuth. Does not have any object model representing the API, data is just returned as JSON strings.}
 
   s.rubyforge_project = "cosm_client"
 
@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
-  # s.add_development_dependency "rspec"
+  s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"
 end
