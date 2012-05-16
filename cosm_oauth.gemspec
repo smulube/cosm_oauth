@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "cosm_client/version"
+require "cosm_oauth/version"
 
 Gem::Specification.new do |s|
-  s.name        = "cosm_client"
-  s.version     = Cosm::VERSION
+  s.name        = "cosm_oauth"
+  s.version     = Cosm::OAuth::VERSION
   s.authors     = ["Sam Mulube"]
-  s.email       = ["sam@cosm.com"]
+  s.email       = ["sam.mulube@logmein.com"]
   s.homepage    = ""
   s.summary     = %q{Simple Ruby client for accessing the Cosm API via OAuth.}
   s.description = %q{Simple Ruby client for accessing the Cosm API via OAuth. Does not have any object model representing the API, data is just returned as JSON strings.}
 
-  s.rubyforge_project = "cosm_client"
+  s.rubyforge_project = "cosm_oauth"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

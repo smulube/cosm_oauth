@@ -1,5 +1,5 @@
 $:.push File.expand_path("../lib", __FILE__)
-require 'cosm_client'
+require 'cosm_oauth'
 
 require 'webmock/rspec'
 
