@@ -4,9 +4,9 @@ require "cosm_client/version"
 
 Gem::Specification.new do |s|
   s.name        = "cosm_client"
-  s.version     = CosmClient::VERSION
+  s.version     = Cosm::VERSION
   s.authors     = ["Sam Mulube"]
-  s.email       = ["sam@pachube.com"]
+  s.email       = ["sam@cosm.com"]
   s.homepage    = ""
   s.summary     = %q{Simple Ruby client for accessing the Cosm API via OAuth.}
   s.description = %q{Simple Ruby client for accessing the Cosm API via OAuth. Does not have any object model representing the API, data is just returned as JSON strings.}
@@ -22,4 +22,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"
   s.add_development_dependency "webmock"
+  s.add_development_dependency "guard"
+  s.add_development_dependency "guard-rspec"
+  s.add_runtime_dependency "rest-client"
+  s.add_runtime_dependency "addressable"
+  s.add_runtime_dependency "oj"
 end
