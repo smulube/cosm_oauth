@@ -23,11 +23,11 @@ describe Cosm::OAuth::Client do
   end
 
   it "should generate an authorization_url" do
-   @client.authorization_url.should == "https://cosm.com/oauth/authorize?client_id=12345&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fcallback"
+   @client.authorization_url.should == "https://cosm.com/oauth/authorise?client_id=12345&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fcallback"
   end
 
   it "should be able to pass a state parameter into the authorization_url method" do
-   @client.authorization_url("quentin fog").should == "https://cosm.com/oauth/authorize?client_id=12345&state=quentin+fog&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fcallback"
+   @client.authorization_url("quentin fog").should == "https://cosm.com/oauth/authorise?client_id=12345&state=quentin+fog&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fcallback"
   end
 
   it "should have a method for fetching an access_token" do

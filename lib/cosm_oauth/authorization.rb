@@ -10,7 +10,7 @@ module Cosm
                    :state => state,
                    :response_type => "code",
                    :redirect_uri => @redirect_uri }.delete_if { |key, val| val.to_s == "" }
-        return "#{OAUTH_BASE}/authorize?#{Addressable::URI.form_encode(params)}"
+        return "#{OAUTH_BASE}/authorise?#{Addressable::URI.form_encode(params)}"
       end
 
       def fetch_access_token(code)
