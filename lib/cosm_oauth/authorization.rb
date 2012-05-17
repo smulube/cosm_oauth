@@ -38,8 +38,6 @@ module Cosm
 
         raise "Error obtaining access_token: #{response.code} #{response.body}" unless response.code.to_i == 200
 
-        @body = response.body
-
         parsed = Oj.load(response.body)
 
         @access_token = parsed["access_token"]

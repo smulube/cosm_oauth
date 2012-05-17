@@ -11,10 +11,7 @@ module Cosm
     class Client
       include Cosm::OAuth::Authorization
 
-      attr_accessor :client_id, :client_secret, :redirect_uri, :user_agent
-      attr_reader :code, :code_requested_at, :access_token, :user, :body
-
-      attr_accessor :user_agent
+      attr_accessor :client_id, :client_secret, :redirect_uri, :scope, :user_agent, :code, :access_token, :user
 
       def initialize(options = {})
         @client_id = options[:client_id]

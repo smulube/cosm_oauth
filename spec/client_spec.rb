@@ -16,7 +16,7 @@ describe Cosm::OAuth::Client do
     @client.should_not be_nil
   end
 
-  it "should have an authorization object" do
+  it "should have instance variables set as expected" do
     @client.client_id.should == "12345"
     @client.client_secret.should == "abcdefg12345"
     @client.redirect_uri.should == "http://localhost/callback"
@@ -40,6 +40,13 @@ describe Cosm::OAuth::Client do
    @client.should_not be_authorized
    @client.fetch_access_token("code")
    @client.should be_authorized
+  end
+
+  it "should be possible to set the access_token and user" do
+    @client.should_not be_authorized
+    @client.access_token = "12345"
+    @client.user = "bob"
+    @client.should be_authorized
   end
 
 end
