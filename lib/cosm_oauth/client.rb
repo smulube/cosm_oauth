@@ -21,21 +21,49 @@ module Cosm
         @user_agent = options[:user_agent] || DEFAULT_USER_AGENT
       end
 
-      def get(endpoint, params = nil, options = {})
+      def get(resource, params = {}, headers = {})
+        raise "No OAuth credentials present " unless authorized?
+        headers = prepare_headers(headers)
+        response = RestClient.get(url(resource, params), headers)
+        return response.body
       end
 
-      def post(endpoint, data, options = {})
+      def post(resource, data, headers = {})
+        raise "No OAuth credentials present " unless authorized?
+        headers = prepare_headers(headers)
+        RestClient.post(url(resource), data, headers)
       end
 
-      def put(endpoint, data, options = {})
+      def put(endpoint, data, headers = {})
+        raise "No OAuth credentials present " unless authorized?
+        headers = prepare_headers(headers)
+        RestClient.put(url(resource), data, headers)
       end
 
-      def delete(endpoint, options = {})
+      def delete(endpoint, headers = {})
+        raise "No OAuth credentials present " unless authorized?
+        headers = prepare_headers(headers)
+        RestClient.delete(url(resource), headers)
       end
 
       private
 
-      def request(method, endpoint, body, options = {})
+      def url(resource, params = {})
+        url = API_BASE
+        url += "/" unless resource.match(/^\//)
+        url += resource
+        unless params.empty?
+          url += "?"
+          url += Addressable::URI.form_encode(params)
+        end
+        return url
+      end
+
+      def prepare_headers(headers)
+        headers ||= {}
+        headers[:user_agent] ||= @user_agent
+        headers[:authorization] = "Bearer #{@access_token}"
+        return headers
       end
     end
   end
