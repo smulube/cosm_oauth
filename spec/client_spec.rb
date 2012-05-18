@@ -3,12 +3,12 @@ require 'spec_helper'
 describe Cosm::OAuth::Client do
   before(:each) do
     @client = Cosm::OAuth::Client.new(:client_id => "12345", :client_secret => "abcdefg12345", :redirect_uri => "http://localhost/callback")
-    stub_request(:post, "https://cosm.com:80/oauth/token").
-      with(:body => Addressable::URI.form_encode(:code => "code", :client_id => @client.client_id,
-                                                 :client_secret => @client.client_secret,
-                                                 :grant_type => "authorization_code",
-                                                 :redirect_uri => @client.redirect_uri),
-           :headers => {'User-Agent' => Cosm::OAuth::DEFAULT_USER_AGENT }).
+    stub_request(:post, "https://cosm.com/oauth/token").
+      with(:body => { :code => "code", :client_id => @client.client_id,
+                   :client_secret => @client.client_secret,
+                   :grant_type => "authorization_code",
+                   :redirect_uri => @client.redirect_uri },
+           :headers => {'Accept' => '*/*', 'User-Agent' => Cosm::OAuth::DEFAULT_USER_AGENT }).
       to_return(:status => 200, :body => '{"access_token":"access_token","user":"user"}')
   end
 

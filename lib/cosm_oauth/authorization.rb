@@ -1,6 +1,7 @@
 require 'openssl'
 require 'addressable/uri'
 require 'oj'
+require 'rest_client'
 
 module Cosm
   module OAuth
@@ -17,27 +18,15 @@ module Cosm
       def fetch_access_token(code)
         @code = code
 
-        uri = Addressable::URI.parse("#{OAUTH_BASE}/token")
-        request = Net::HTTP::Post.new(uri.path)
-        request.body = Addressable::URI.form_encode(:code => @code,
-                                                    :client_id => @client_id,
-                                                    :client_secret => @client_secret,
-                                                    :grant_type => "authorization_code",
-                                                    :redirect_uri => @redirect_uri)
+        response = RestClient.post("#{OAUTH_BASE}/token",
+                                   { :code => @code,
+                                     :client_id => @client_id,
+                                     :client_secret => @client_secret,
+                                     :grant_type => "authorization_code",
+                                     :redirect_uri => @redirect_uri },
+                                    { 'Accept' => '*/*', 'User-Agent' => @user_agent })
 
-        headers = { 'User-Agent' => @user_agent }
-        request.initialize_http_header(headers)
-
-        http = Net::HTTP.new(uri.host, uri.port)
-
-        if uri.scheme == 'https'
-          http.use_ssl = true
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        end
-
-        response = http.request(request)
-
-        raise "Error obtaining access_token: #{response.code} #{response.body}" unless response.code.to_i == 200
+        raise "Error obtaining access_token: #{response.code} #{response.body}" unless response.code == 200
 
         parsed = Oj.load(response.body)
 
